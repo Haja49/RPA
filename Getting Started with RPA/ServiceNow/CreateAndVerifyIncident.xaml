@@ -1,0 +1,519 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="CreateAndVerifyIncident" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="848,5306.4" sap2010:WorkflowViewState.IdRef="CreateAndVerifyIncident_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="21">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="CreateAndVerifyIncident" sap:VirtualizedContainerService.HintSize="828,5246.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:GenericValue" Name="IncidentNumber" />
+      <Variable x:TypeArguments="x:String" Name="ServiceFilter" />
+      <Variable x:TypeArguments="ui:Browser" Name="ServiceNow" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:OpenBrowser Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" BrowserType="Chrome" CommunicationMethod="Native" DisplayName="Open Browser and Enter URL" sap:VirtualizedContainerService.HintSize="786.4,5091.2" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" UiBrowser="[ServiceNow]" Url="https://dev99459.service-now.com/">
+      <ui:OpenBrowser.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence sap:VirtualizedContainerService.HintSize="752.8,4991.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ui:GenericValue" Name="IncidentSearchResult" />
+              <Variable x:TypeArguments="ui:GenericValue" Name="WebTitle" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Delay DisplayName="Delay to wait for page load" Duration="00:00:05" sap:VirtualizedContainerService.HintSize="711.2,22.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+            <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="title" DisplayName="Get Title of the Webpage" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+              <ui:GetAttribute.Result>
+                <OutArgument x:TypeArguments="ui:GenericValue">[WebTitle]</OutArgument>
+              </ui:GetAttribute.Result>
+              <ui:GetAttribute.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" InformativeScreenshot="c57237b79a25b0554cc61cbde3ca99e6">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetAttribute.Target>
+            </ui:GetAttribute>
+            <If Condition="[WebTitle.Equals(&quot;ServiceNow&quot;)]" DisplayName="Condition to skip login if User is logged in already" sap:VirtualizedContainerService.HintSize="711.2,700" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="375.2,550.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter Username" EmptyField="True" sap:VirtualizedContainerService.HintSize="333.6,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_12" Text="admin[k(tab)]">
+                    <ui:TypeInto.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="467fc4dda340247e35a7ef70765b3d11" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='user_name' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:TypeInto.Target>
+                  </ui:TypeInto>
+                  <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter Password" EmptyField="True" sap:VirtualizedContainerService.HintSize="333.6,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_13" Text="Dhigiahasan@1[k(tab)]">
+                    <ui:TypeInto.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="70c212d795bff8b6a4cea2aef2152954" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='user_password' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:TypeInto.Target>
+                  </ui:TypeInto>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on Login" sap:VirtualizedContainerService.HintSize="333.6,107.2" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="482069c3f548f245b917d5c85bdb59e0" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sysverb_login' tag='BUTTON' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                  </ui:Click>
+                </Sequence>
+              </If.Then>
+            </If>
+            <Assign sap:VirtualizedContainerService.HintSize="711.2,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[ServiceFilter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">incident</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter Search option in Filter Navigator" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="[ServiceFilter]">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f7d90277c56c5080ef734ca815d18fde" Selector="&lt;webctrl id='filter' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on Create New" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f73a0e8e63bbd21f089fa78d0d10b410" Selector="[&quot;&lt;webctrl tag='A' href='*&quot;+ServiceFilter+&quot;*' innertext='Create New' /&gt;&quot;]">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get the Incident Number generated by default and store in a variable" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_1">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="0360b0f75331c86e670af32d4fafaeae" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.number' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[IncidentNumber]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Display Incident Number" sap:VirtualizedContainerService.HintSize="711.2,60" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[IncidentNumber]" />
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Caller input field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="Abel Tuter">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fde383feefcf0a02688e8937529574cd" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sys_display.incident.caller_id' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from the Category dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_1" Item="Software">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="8">
+                  <x:String>-- None --</x:String>
+                  <x:String>Inquiry / Help</x:String>
+                  <x:String>Software</x:String>
+                  <x:String>Hardware</x:String>
+                  <x:String>Network</x:String>
+                  <x:String>Database</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="91bab7dee3de3ec5b5eb84b5e4717d3b" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.category' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from the Sub category dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_2" Item="Email">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="4">
+                  <x:String>-- None --</x:String>
+                  <x:String>Antivirus</x:String>
+                  <x:String>Email</x:String>
+                  <x:String>Internal Application</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fbd953af51ac37090bc9d50db7505660" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.subcategory' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Service input field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_5" Text="SAP Enterprise Services">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="7a2af3414164a4fd55642f0ac1c287ac" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sys_display.incident.business_service' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Configuration item field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="*ASSET-IBM">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="90939f7e6584bc5207213d19e8389639" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sys_display.incident.cmdb_ci' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from Contact type dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_3" Item="Phone">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="8">
+                  <x:String>-- None --</x:String>
+                  <x:String>Email</x:String>
+                  <x:String>Phone</x:String>
+                  <x:String>Self-service</x:String>
+                  <x:String>Walk-in</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="a47cf623596b7950bea5e65b06a25c3b" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.contact_type' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from State dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_4" Item="New">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="8">
+                  <x:String>New</x:String>
+                  <x:String>In Progress</x:String>
+                  <x:String>On Hold</x:String>
+                  <x:String>Resolved</x:String>
+                  <x:String>Closed</x:String>
+                  <x:String>Canceled</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="8d420d023a1b6c0be2403ad774bb87ad" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.state' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from Impact dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_5" Item="2 - Medium">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="4">
+                  <x:String>1 - High</x:String>
+                  <x:String>2 - Medium</x:String>
+                  <x:String>3 - Low</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="8c5d1967cff99982e220ef7c4b64eb68" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.impact' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select an option from Urgency dropdown" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="SelectItem_6" Item="2 - Medium">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="4">
+                  <x:String>1 - High</x:String>
+                  <x:String>2 - Medium</x:String>
+                  <x:String>3 - Low</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="71dafc73cb9173be4efc5aa62f772245" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.urgency' tag='SELECT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SelectItem.Target>
+            </ui:SelectItem>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Assignment group field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_7" Text="Application Development">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="004229c1add7371b27e82cfa35d12f4b" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sys_display.incident.assignment_group' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Assigned to field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_8" Text="Arya Hajarha">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="36cdd2f9cdb416329a4688192abf2c53" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sys_display.incident.assigned_to' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Short Description field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_9" Text="Create New Incident">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="06611ca26bbe1d28d56df441091cd430" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.short_description' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter data in Description field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_10" Text="Create New Incident Using UIPath">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="12d8b7434cb440dab98418fcc0e8b88a" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='incident.description' tag='TEXTAREA' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on Submit button" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="51760acee255cf2751f82adf872860b9" Selector="&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl id='sysverb_insert' tag='BUTTON' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Enter the captured Incident Number in Search field" sap:VirtualizedContainerService.HintSize="711.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_11" Text="[IncidentNumber+ &quot;[k(enter)]&quot;]">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d9e3651797de91ad63763586fa5376d3" Selector="&lt;html app='chrome.exe' title='Incidents | ServiceNow' /&gt;&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div' id='incident_list' tag='DIV' /&gt;&lt;webctrl id='*text' tag='INPUT' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get the text of the resulting Incident Number" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_2">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="12deed924b93676d76cbaa1a66153c52" Selector="&lt;html app='chrome.exe' title='Incidents | ServiceNow' /&gt;&lt;webctrl id='gsft_main' tag='IFRAME' /&gt;&lt;webctrl aaname='INC*' parentid='row_incident*' tag='A' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[IncidentSearchResult]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <If Condition="[IncidentNumber.Equals(IncidentSearchResult)]" DisplayName="Condition to verify Newly created Incident Number" sap:VirtualizedContainerService.HintSize="711.2,209.6" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;New Incident is created successfully&quot;]" />
+              </If.Then>
+              <If.Else>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;New Incident is not created&quot;]" />
+              </If.Else>
+            </If>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on User to Logout" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="7a585193587eb0ca14bf01ca71c6ffdd" Selector="&lt;webctrl aaname='System Administrator' parentid='user_info_dropdown' tag='SPAN' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on Logout button" sap:VirtualizedContainerService.HintSize="711.2,107.2" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e9f9ee58b89f16275e102bd2d8007508" Selector="&lt;webctrl aaname='Logout' tag='A' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+          </Sequence>
+        </ActivityAction>
+      </ui:OpenBrowser.Body>
+    </ui:OpenBrowser>
+    <ui:CloseTab Browser="[ServiceNow]" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="786.4,22.4" sap2010:WorkflowViewState.IdRef="CloseTab_1" />
+  </Sequence>
+</Activity>
